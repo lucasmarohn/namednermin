@@ -57,7 +57,7 @@ module.exports = {
           return entities
         },
         searchAndReplaceContentUrls: {
-          sourceUrl: 'https://lucasmarohn.com/n',
+          sourceUrl: 'https://lucasmarohn.com/n/',
           replacementUrl: 'https://localhost:8000'
         }
       }

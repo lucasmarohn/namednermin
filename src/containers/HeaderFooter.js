@@ -5,7 +5,7 @@ import Footer from "../components/footer"
 
 export default ({ children }) => {
   return (
-    <div class="container">
+    <div className="container">
       <Header />
       <main role="main">{children}</main>
       <Footer />

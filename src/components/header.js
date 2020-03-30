@@ -1,6 +1,5 @@
 import React from 'react'
 import { Link, graphql, useStaticQuery } from 'gatsby'
-import Helmet from 'react-helmet'
 
 import eye from '../img/icons/eye.gif'
 
@@ -9,10 +8,9 @@ export default () => {
   const data = useStaticQuery(
     graphql`
       query {
-        site {
-          siteMetadata {
-            title
-          }
+        wordpressSiteMetadata {
+          name
+          url
         }
         wordpressMenusMenusItems(slug: { eq: "navigation" }) {
           id
@@ -43,6 +41,7 @@ export default () => {
           <ul id='menu-header-menu'>
             {data.wordpressMenusMenusItems.items.map(
                ({ title, slug, url, classes }, index) => {
+                 console.log('slug', slug, 'url', url)
                  if(!slug && url) {
                    return (
                     <li className={`menu-item page__item ${classes}`} key={index}>
@@ -54,7 +53,7 @@ export default () => {
                  }
                  return (
                    <li className={`menu-item page_item ${classes}`} key={index}>
-                     <Link to={`${slug}`}>
+                     <Link to={`/${slug === 'n.emergence.design' ? '' : slug}`}>
                        {title}
                      </Link>
                    </li>

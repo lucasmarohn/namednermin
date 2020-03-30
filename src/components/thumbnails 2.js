@@ -4,11 +4,14 @@ import Img from "gatsby-image"
 
 
 const ThumbGrid = ({ images, handleOpen, classes }) => {
+
+  console.log('thumbgrid', images)
   return images.map((image, i) => {
     return (
-    <div className="masonry-image-container" key={i}>
+    <div className="masonry-image-container">
       <button
         onClick={handleOpen(i)}
+        key={i}
       >
         <Img
           fluid={image.childImageSharp.fluid}

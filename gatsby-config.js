@@ -42,7 +42,7 @@ module.exports = {
       resolve: 'gatsby-source-wordpress',
       options: {
         // I have created a dummy site for us to use with the plugins we discussed
-        baseUrl: 'lucasmarohn.com/n',
+        baseUrl: 'n.emergence.design',
         protocol: 'https',
         hostingWPCOM: false,
         // We will be using some advanced custom fields
@@ -57,7 +57,7 @@ module.exports = {
           return entities
         },
         searchAndReplaceContentUrls: {
-          sourceUrl: 'https://lucasmarohn.com/n/',
+          sourceUrl: 'https://n.emergence.design',
           replacementUrl: 'https://localhost:8000'
         }
       }

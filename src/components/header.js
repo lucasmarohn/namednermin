@@ -19,9 +19,9 @@ export default () => {
           slug
           items {
             title
-            slug
             classes
             url
+            slug
           }
         }
       }
@@ -36,18 +36,27 @@ export default () => {
           width='50'
           height='50'
           style={{display: 'block', margin: '0 auto 5rem auto'}}
+          className="no-zoom"
           alt='' />
         </Link>
         <div id='navigation' className='wrapper'>
           <ul id='menu-header-menu'>
             {data.wordpressMenusMenusItems.items.map(
-               ({ title, url, classes }, index) => {
-                 console.log(url)
+               ({ title, slug, url, classes }, index) => {
+                 if(!slug && url) {
+                   return (
+                    <li className={`menu-item page__item ${classes}`} key={index}>
+                      <a href={url} target="_blank" rel="noopener noreferrer">
+                        {title}
+                      </a>
+                   </li>
+                   )
+                 }
                  return (
                    <li className={`menu-item page_item ${classes}`} key={index}>
-                     <a href={url}>
+                     <Link to={`${slug}`}>
                        {title}
-                     </a>
+                     </Link>
                    </li>
                  )}
              )}

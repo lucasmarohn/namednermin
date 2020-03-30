@@ -1,59 +1,78 @@
 import React from 'react'
-import { Link, graphql } from 'gatsby'
+import { graphql } from 'gatsby'
 import HeaderFooter from '../containers/HeaderFooter'
 import { Helmet } from 'react-helmet'
 
 import '../sass/index.sass'
 
 export default ({ data }) => {
-  const [navOpen] = false
+
+  const masonryOptions = {
+    transitionDuration: 0,
+    gutter: 30
+  }
+
+  const imagesLoadedOptions = { background: '.my-bg-image-el' }
+
+  const lightboxOptions = {
+    overlayColor: 'rgba(255,255,255,.75)',
+    buttonsBackgroundColor: 'rgba(255,255,255,1)',
+    buttonsIconColor: 'black'
+  }
 
   return (
-    <HeaderFooter class={navOpen && 'mobile-nav-open'}>
+    <HeaderFooter>
       <Helmet>
         <title>
-          Home | Emergence Design
+          Home
         </title>
         <meta name='description' content='Web Design and Development Agency for Growing Brands'></meta>
       </Helmet>
-      <section className='work__case-studies'>
-        <div className='work__list wrapper'>
-          {data.allWordpressWpJetpackPortfolio.edges.map(({ node }, index) => {
-             const slug = `/case-study/${node.slug}`
-             return (
-               <article className='post__item' key={index}>
-                 <Link to={slug}>
-                 <img style={{ backgroundImage: `url(${node.featured_media.source_url})` }} className='thumbnail' alt='' />
-                 </Link>
-                 <Link to={slug} className='h3 post__title'>
-                 {node.title}
-                 </Link>
-                 <div to={slug} className='post__excerpt'>
-                   {node.excerpt}
-                 </div>
-               </article>
-             )}
-           )}
-        </div>
-      </section>
+      <div class='masonry-gallery'>
+        {data.wordpressAcfPages.acf.grid.map(item => {
+           if (item.media_details.fileformat === 'mp4') {
+             return <div className='masonry-video-container' style={{'--aspect-ratio': `${item.media_details.height / item.media_details.width * 100}%`}}>
+                      <div class='video-container'>
+                        <video
+                          controls='true'
+                          muted='true'
+                          autoplay='true'
+                          src={item.source_url}></video>
+                      </div>
+                    </div>
+           } else if (! item.localFile.childImageSharp) return false
+           return (
+             <div className='masonry-image-container'>
+               <a href={item.source_url} data-attribute='SRL'><img src={item.localFile.childImageSharp.src} srcset={item.localFile.childImageSharp.fluid.srcSet} alt='' /></a>
+             </div>
+           )
+         })}
+      </div>
     </HeaderFooter>
   )
 }
 
 export const query = graphql`
 query {
-    allWordpressWpJetpackPortfolio {
-      edges {
-        node {
-          wordpress_id
-          slug
-          title
-          excerpt
-          featured_media {
-            source_url
+  wordpressAcfPages(wordpress_id: {eq: 8}) {
+    acf {
+      grid {
+        localFile {
+          childImageSharp {
+            fluid {
+              src
+              srcSet
+            }
           }
+        }
+        source_url
+        media_details {
+          fileformat
+          width
+          height
         }
       }
     }
   }
+}
 `

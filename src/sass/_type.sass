@@ -1,100 +1,33 @@
 \:root
     font-size: 10px
 
-@font-face
-    font-family: "Space Grotesk Bold"
-    src: url("../fonts/SpaceGrotesk-SemiBold.woff2") format("woff2"), url("../fonts/SpaceGrotesk-SemiBold.woff") format("woff")
+body
+    font-family: Courier New, Courier, monospace
+    font-size: 1.2rem
+    color: black
 
-@font-face
-    font-family: "Space Grotesk"
-    src: url("../fonts/SpaceGrotesk-Light.woff2") format("woff2"), url("../fonts/SpaceGrotesk-Light.woff") format("woff")
+    @media screen and (min-width: 1280px) and (max-width: 3841px)
+        +fluid-type(1280px, 3840px, 12px, 18px)
 
-#backstage
-    max-width: 100%
-    display: block
-    padding: 1rem
-    background: #333333
-    color: #ffffff
-    font-size: 1.4rem
-    text-decoration: none
+    @media screen and (min-width: 3840)
+        1.8rem
 
-    *
-        color: white
+a
+    color: black
+
+    &:hover
         text-decoration: none
 
-    @media screen and (max-width: #{$desktop})
-        display: none
-
-body
-    font-size: 1.6rem
-    box-sizing: border-box
-
-    +fluid-type($portrait, $desktop, 16px, 20px)
-    +fluid-line($portrait, $desktop, 22px, 28px)
-
-.h1, .h2, .h3, .h4
-    color: white
-    font-family: "Space Grotesk"
-
-h1,
-.h1
-    font-weight: 700
-    text-decoration: none
-    margin-top: 0
-    font-family: "Space Grotesk Bold"
-
-    +fluid-type($portrait, $ultrawide, 28px, 54px)
-    +fluid-line($portrait, $ultrawide, 28px, 64px)
-
-h2,
-.h2
-    font-weight: 700
-    text-decoration: none
-    margin-top: 0
-    font-family: "Space Grotesk Bold"
-
-    +fluid-type($portrait, $landscape, 24px, 28px)
-    +fluid-line($portrait, $landscape, 28px, 34px)
-
-h3,
-.h3
-    font-weight: 700
-    text-decoration: none
-    margin-top: 0
-    font-family: "Space Grotesk Bold"
-
-    +fluid-type($portrait, $landscape, 18px, 24px)
-    +fluid-line($portrait, $landscape, 28px, 32px)
-
-.h4
-    text-decoration: none
-
-    +fluid-type($portrait, $landscape, 16px, 18px)
-    +fluid-line($portrait, $landscape, 22px, 24px)
-
-.headline
-    font-weight: 700
-    color: var(--primary)
-    text-transform: uppercase
-    letter-spacing: 0.2em
+h1, h2, h3, h4
     font-size: 1.8rem
+    font-weight: 600
+    text-align: center
+    text-transform: uppercase
+    margin-top: 3rem
+
+p
+    margin-top: 3rem
     line-height: 2.4rem
-    margin-bottom: 1rem
-    font-family: "Space Grotesk Bold"
 
-blockquote
-    border-left: 0.2rem solid #{$accent}
-    margin-left: 0
-    padding-left: 3rem
-    padding-right: 2rem
-    width: 100%
-
-p + h1,
-p + .h1
-
-p + h2,
-p + .h2
-
-p + h3,
-p + .h3
-    margin-top: 6rem
+p + p
+    margin-top: 2.5rem

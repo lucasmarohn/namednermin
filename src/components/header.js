@@ -1,17 +1,10 @@
 import React from 'react'
 import { Link, graphql, useStaticQuery } from 'gatsby'
+import Helmet from 'react-helmet'
 
-import hamburger from '../img/icons/bars.svg'
+import eye from '../img/icons/eye.gif'
 
-export default ({ navOpen, toggleNav, toggleContact }) => {
-
-  const handleHamburgerClick = () => {
-    toggleNav(!navOpen)
-  }
-
-  const handleContactClick = () => {
-    toggleContact(true)
-  }
+export default () => {
 
   const data = useStaticQuery(
     graphql`
@@ -21,13 +14,14 @@ export default ({ navOpen, toggleNav, toggleContact }) => {
             title
           }
         }
-        wordpressMenusMenusItems(slug: { eq: "header-menu" }) {
+        wordpressMenusMenusItems(slug: { eq: "navigation" }) {
           id
           slug
           items {
             title
             slug
             classes
+            url
           }
         }
       }
@@ -37,34 +31,23 @@ export default ({ navOpen, toggleNav, toggleContact }) => {
     <header className='header clear'>
       <div className='wrapper'>
         <Link to='/' className='logo'>
-        {data.site.siteMetadata.title}
+        <img
+          src={eye}
+          width='50'
+          height='50'
+          style={{display: 'block', margin: '0 auto 5rem auto'}}
+          alt='' />
         </Link>
-        <label id='mobile-hamburger-label' for='mobile-hamburger-checkbox'>
-          <img src={hamburger} alt='Toggle Menu' />
-        </label>
-        <input
-          id='mobile-hamburger-checkbox'
-          type='checkbox'
-          onChange={handleHamburgerClick}
-          checked={navOpen} />
         <div id='navigation' className='wrapper'>
-          <ul id='menu-header-menu' className={navOpen ? 'menu visible' : 'menu'}>
+          <ul id='menu-header-menu'>
             {data.wordpressMenusMenusItems.items.map(
-               ({ title, slug, classes }, index) => {
-                 const contact = classes.includes('js-open-contact-modal')
+               ({ title, url, classes }, index) => {
+                 console.log(url)
                  return (
-                   <li
-                     onClick={contact ? handleContactClick : null}
-                     className={`menu-item page_item ${classes}`}
-                     key={index}
-                     style={navOpen ? { transitionDelay: `${(index + 1) * 100}ms` } : null}>
-                     {!contact ?
-                        <Link to={slug === 'emergence.design' ? `/` : slug}>
-                        {title}
-                        </Link>
-                        : <a href='#contact'>
-                            {title}
-                          </a>}
+                   <li className={`menu-item page_item ${classes}`} key={index}>
+                     <a href={url}>
+                       {title}
+                     </a>
                    </li>
                  )}
              )}

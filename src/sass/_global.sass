@@ -28,8 +28,9 @@ main
 
 .ril-outer,
 .ril-toolbar
-    background: rgba(255,255,255,.75)
+    background: rgba(255, 255, 255, 0.75)
     color: black
+
     .ril-close
         filter: brightness(25%)
 
@@ -40,18 +41,21 @@ main
         max-height: 100vh
         top: 50%
         transform: translateY(-50%)
+
         img, source
             object-fit: contain !important
 
 .masonry-gallery
     width: 100%
-    > div > button 
+
+    > div > button
         padding: 0
         border: 0
         margin: 0
         width: 100%
+
         &:focus
-            outline: .3rem solid black
+            outline: 0
 
     .masonry-video-container
         width: 100%

@@ -8,9 +8,10 @@ const Lightbox = ({images, selectedImage, handleClose, handlePrevRequest, handle
   const array = []
 
   images.forEach(image => {
-    console.log('image', image)
     if (image.internal.mediaType === 'image/gif') {
-      array.push(<Img src={image.publicURL} />)
+      array.push(<div className='gatsby-image-wrapper' style={{position: 'relative', overflow: 'hidden'}}>
+                   <img src={image.publicURL} style={{display: 'block', margin: 'auto', width: '100%',maxHeight: '100vh'}} />
+                 </div>)
     } else {
       array.push(<NonStretchedImage fluid={image.childImageSharp.fluid} />)
     }

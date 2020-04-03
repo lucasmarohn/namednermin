@@ -4,7 +4,6 @@ import Img from 'gatsby-image'
 
 const ThumbGrid = ({ images, handleOpen, classes }) => {
   return images.map((image, i) => {
-    console.log(image.publicURL)
     return (
       <div className='masonry-image-container' key={i}>
         <button onClick={handleOpen(i)}>

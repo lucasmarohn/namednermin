@@ -11,33 +11,15 @@ module.exports = {
   },
   plugins: [
     {
-      resolve: `gatsby-plugin-google-analytics`,
-      options: {
-        // The property ID; the tracking code won't be generated without it
-        trackingId: 'UA-162142104-1',
-        // Defines where to place the tracking script - `true` in the head and `false` in the body
-        head: false,
-        // Setting this parameter is optional
-        anonymize: true,
-        // Setting this parameter is also optional
-        respectDNT: true,
-        // Avoids sending pageview hits from custom paths
-        // Delays sending pageview hits on route update (in milliseconds)
-        pageTransitionDelay: 0,
-        sampleRate: 5,
-        siteSpeedSampleRate: 10
-      }
-    },
-    `gatsby-transformer-sharp`,
-    `gatsby-plugin-sharp`,
-    `gatsby-plugin-sass`,
-    {
       resolve: `gatsby-source-filesystem`,
       options: {
         name: `src`,
         path: `${__dirname}/src/`
       }
     },
+    `gatsby-transformer-sharp`,
+    `gatsby-plugin-sharp`,
+    `gatsby-transformer-remark`,
     {
       resolve: 'gatsby-source-wordpress',
       options: {
@@ -62,13 +44,32 @@ module.exports = {
         }
       }
     },
+    `gatsby-plugin-sass`,
+    {
+      resolve: `gatsby-plugin-google-analytics`,
+      options: {
+        // The property ID; the tracking code won't be generated without it
+        trackingId: 'UA-162142104-1',
+        // Defines where to place the tracking script - `true` in the head and `false` in the body
+        head: false,
+        // Setting this parameter is optional
+        anonymize: true,
+        // Setting this parameter is also optional
+        respectDNT: true,
+        // Avoids sending pageview hits from custom paths
+        // Delays sending pageview hits on route update (in milliseconds)
+        pageTransitionDelay: 0,
+        sampleRate: 5,
+        siteSpeedSampleRate: 10
+      }
+    },
     {
       resolve: `gatsby-plugin-sharp`,
       options: {
         useMozJpeg: false,
         stripMetadata: true,
-        defaultQuality: 75,
-      },
+        defaultQuality: 100
+      }
     },
     {
       resolve: `gatsby-transformer-remark`,
@@ -77,14 +78,14 @@ module.exports = {
           {
             resolve: `gatsby-remark-images`,
             options: {
-              maxWidth: 590,
-              linkImagesToOriginal: false // point!
+              maxWidth: 900,
+              linkImagesToOriginal: true // point!
             }
           },
           {
             resolve: `gatsby-remark-images-medium-zoom`, // point!
             options: {
-              background: '#FFFFFF',
+              background: '#FFFFFF'
             }
           }
         ]

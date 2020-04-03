@@ -1,7 +1,7 @@
-import React, { useState } from "react"
-import { graphql, useStaticQuery } from "gatsby"
-import ThumbGrid from "./thumbnails"
-import LightBox from "./lightbox"
+import React, { useState } from 'react'
+import { graphql, useStaticQuery } from 'gatsby'
+import ThumbGrid from './thumbnails'
+import LightBox from './lightbox'
 
 import 'lightbox-react/style.css'
 
@@ -31,14 +31,13 @@ const GalleryComponent = props => {
           grid {
             localFile {
               childImageSharp {
-                fluid(maxWidth: 700) {
-                  ...GatsbyImageSharpFluid_noBase64
+                fluid(maxWidth: 1500) {
+                  ...GatsbyImageSharpFluid
                 }
               }
+              publicURL
             }
-            source_url
             media_details {
-              fileformat
               width
               height
             }
@@ -51,24 +50,24 @@ const GalleryComponent = props => {
   const images = () => {
     const arr = []
     grid.wordpressAcfPages.acf.grid.forEach(item => {
-      if(!item.localFile.childImageSharp) return false
-      arr.push( item.localFile )
+      if (item.localFile)
+        if (!item.localFile.childImageSharp) return false
+      arr.push(item.localFile)
     })
     return arr
   }
 
   return (
-    <div className="masonry-gallery">
+    <div className='masonry-gallery'>
       <ThumbGrid images={images()} handleOpen={handleOpen} />
       {showLightbox && selectedImage !== null && (
-        <LightBox
-          images={images()}
-          handleClose={handleClose}
-          handleNextRequest={handleNextRequest}
-          handlePrevRequest={handlePrevRequest}
-          selectedImage={selectedImage}
-        />
-      )}
+       <LightBox
+         images={images()}
+         handleClose={handleClose}
+         handleNextRequest={handleNextRequest}
+         handlePrevRequest={handlePrevRequest}
+         selectedImage={selectedImage} />
+       )}
     </div>
   )
 }

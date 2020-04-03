@@ -1,24 +1,23 @@
-import React from "react"
+import React from 'react'
 
-import LightboxReact from "lightbox-react"
-import NonStretchedImage from "./nonStretchedImage"
+import LightboxReact from 'lightbox-react'
+import Img from 'gatsby-image'
+import NonStretchedImage from './nonStretchedImage'
 
-const Lightbox = ({
-  images,
-  selectedImage,
-  handleClose,
-  handlePrevRequest,
-  handleNextRequest,
-}) => {
+const Lightbox = ({images, selectedImage, handleClose, handlePrevRequest, handleNextRequest}) => {
   const array = []
 
-  images.forEach(image => (
-    array.push(<NonStretchedImage fluid={image.childImageSharp.fluid} />)
-  ))
+  images.forEach(image => {
+    console.log('image', image)
+    if (image.internal.mediaType === 'image/gif') {
+      array.push(<Img src={image.publicURL} />)
+    } else {
+      array.push(<NonStretchedImage fluid={image.childImageSharp.fluid} />)
+    }
+  })
 
   return (
     <LightboxReact
-    
       enableZoom={false}
       clickOutsideToClose={true}
       mainSrc={array[selectedImage]}
@@ -26,8 +25,7 @@ const Lightbox = ({
       prevSrc={array[(selectedImage + array.length - 1) % images.length]}
       onCloseRequest={handleClose}
       onMovePrevRequest={handlePrevRequest(selectedImage, array.length)}
-      onMoveNextRequest={handleNextRequest(selectedImage, array.length)}
-    />
+      onMoveNextRequest={handleNextRequest(selectedImage, array.length)} />
   )
 }
 

@@ -32,10 +32,13 @@ const GalleryComponent = props => {
             localFile {
               childImageSharp {
                 fluid(maxWidth: 1500) {
-                  ...GatsbyImageSharpFluid
+                  ...GatsbyImageSharpFluid_tracedSVG
                 }
               }
               publicURL
+              internal {
+                mediaType
+              }
             }
             media_details {
               width
@@ -50,8 +53,7 @@ const GalleryComponent = props => {
   const images = () => {
     const arr = []
     grid.wordpressAcfPages.acf.grid.forEach(item => {
-      if (item.localFile)
-        if (!item.localFile.childImageSharp) return false
+      if (!item.localFile) return false
       arr.push(item.localFile)
     })
     return arr

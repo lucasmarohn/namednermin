@@ -32,7 +32,7 @@ const GalleryComponent = props => {
             localFile {
               childImageSharp {
                 fluid(maxWidth: 1500) {
-                  ...GatsbyImageSharpFluid_tracedSVG
+                  ...GatsbyImageSharpFluid
                 }
               }
               publicURL

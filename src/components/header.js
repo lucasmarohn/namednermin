@@ -31,10 +31,10 @@ export default () => {
         <Link to='/' className='logo'>
         <img
           src={eye}
-          width='50'
-          height='50'
-          style={{display: 'block', margin: '0 auto 5rem auto'}}
-          className="no-zoom"
+          width='75'
+          height='75'
+          style={{display: 'block', margin: '0 auto 5rem auto', imageRendering: 'crisp-edges'}}
+          className='no-zoom'
           alt='' />
         </Link>
         <div id='navigation' className='wrapper'>
@@ -42,19 +42,19 @@ export default () => {
             {data.wordpressMenusMenusItems.items.map(
                ({ title, slug, url, classes }, index) => {
                  console.log('slug', slug, 'url', url)
-                 if(!slug && url) {
+                 if (!slug && url) {
                    return (
-                    <li className={`menu-item page__item ${classes}`} key={index}>
-                      <a href={url} target="_blank" rel="noopener noreferrer">
-                        {title}
-                      </a>
-                   </li>
+                     <li className={`menu-item page__item ${classes}`} key={index}>
+                       <a href={url} target='_blank' rel='noopener noreferrer'>
+                         {title}
+                       </a>
+                     </li>
                    )
                  }
                  return (
                    <li className={`menu-item page_item ${classes}`} key={index}>
                      <Link to={`/${slug === 'n.emergence.design' ? '' : slug}`}>
-                       {title}
+                     {title}
                      </Link>
                    </li>
                  )}

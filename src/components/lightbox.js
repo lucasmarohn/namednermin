@@ -8,24 +8,11 @@ const Lightbox = ({images, selectedImage, handleClose, handlePrevRequest, handle
   const array = []
 
   images.forEach(image => {
-    console.log(image.media_details.fileformat)
     const localCopy = image.localFile
     if (localCopy && localCopy.internal.mediaType === 'image/gif') {
       array.push(<div className='gatsby-image-wrapper' style={{ position: 'relative', overflow: 'hidden' }}>
                    <Img fluid={localCopy.fluid} style={{ display: 'block', margin: 'auto', width: '100%', maxHeight: '100vh' }} />
                  </div>)
-    } else if (image.media_details.fileformat === 'mp4') {
-      array.push(
-        <div className='gatsby-image-wrapper' style={{ position: 'relative', overflow: 'hidden' }}>
-          <video
-            style={{ display: 'block', margin: 'auto', width: '100%', maxHeight: '100vh' }}
-            muted
-            controls='false'
-            playsinline='false'>
-            <source src={localCopy.publicURL} type='video/x-m4v' />
-          </video>
-        </div>
-      )
     } else if (image.acf && image.acf.video_embed_url && image.acf.video_embed_url != '') {
       array.push(
         <div className='video-container iframe'>

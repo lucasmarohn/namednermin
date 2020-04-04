@@ -37,6 +37,9 @@ const GalleryComponent = props => {
                 fluid(maxWidth: 1500) {
                   ...GatsbyImageSharpFluid
                 }
+                fixed(width: 400) {
+                  ...GatsbyImageSharpFixed
+                }
               }
               publicURL
               internal {
@@ -46,7 +49,6 @@ const GalleryComponent = props => {
             media_details {
               width
               height
-              fileformat
             }
           }
         }

@@ -8,12 +8,28 @@ const Lightbox = ({images, selectedImage, handleClose, handlePrevRequest, handle
   const array = []
 
   images.forEach(image => {
-    if (image.internal.mediaType === 'image/gif') {
-      array.push(<div className='gatsby-image-wrapper' style={{position: 'relative', overflow: 'hidden'}}>
-                   <img src={image.publicURL} style={{display: 'block', margin: 'auto', width: '100%',maxHeight: '100vh'}} />
+    console.log(image.media_details.fileformat)
+    const localCopy = image.localFile
+    if (localCopy && localCopy.internal.mediaType === 'image/gif') {
+      array.push(<div className='gatsby-image-wrapper' style={{ position: 'relative', overflow: 'hidden' }}>
+                   <img src={localCopy.publicURL} style={{ display: 'block', margin: 'auto', width: '100%', maxHeight: '100vh' }} />
                  </div>)
+    } else if (image.media_details.fileformat === 'mp4') {
+      array.push(
+        <div className='gatsby-image-wrapper' style={{position: 'relative', overflow: 'hidden'}}>
+          <video
+            style={{ display: 'block', margin: 'auto', width: '100%', maxHeight: '100vh' }}
+            autoplay
+            muted
+            looping
+            controls='false'
+            playsinline='false'>
+            <source src={localCopy.publicURL} type='video/x-m4v' />
+          </video>
+        </div>
+      )
     } else {
-      array.push(<NonStretchedImage fluid={image.childImageSharp.fluid} />)
+      array.push(<NonStretchedImage fluid={localCopy.childImageSharp.fluid} />)
     }
   })
 

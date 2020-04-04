@@ -43,6 +43,7 @@ const GalleryComponent = props => {
             media_details {
               width
               height
+              fileformat
             }
           }
         }
@@ -53,8 +54,8 @@ const GalleryComponent = props => {
   const images = () => {
     const arr = []
     grid.wordpressAcfPages.acf.grid.forEach(item => {
-      if (!item.localFile) return false
-      arr.push(item.localFile)
+      if (!item) return false
+      arr.push(item)
     })
     return arr
   }

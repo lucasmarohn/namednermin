@@ -13,9 +13,8 @@ const ThumbGrid = ({ images, handleOpen, classes }) => {
               <video
                 width={image.media_details.width}
                 height={image.media_details.height}
-                autoplay='true'
                 muted='true'
-                loop='true'>
+                controls>
                 <source src={image.localFile.publicURL} type='video/x-m4v' />
               </video>
             </div>

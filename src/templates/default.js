@@ -6,7 +6,7 @@ export default ({ data }) => {
     const page = data.wordpressPage
   return (
       <>
-        <HeaderFooter>
+        <HeaderFooter templateName="default">
           <section className="default-template two-col">
             <div class="col-1">
               <p>named nermin</p>

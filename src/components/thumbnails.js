@@ -6,12 +6,13 @@ const ThumbGrid = ({ images, handleOpen, classes }) => {
 
   return images.map((image, i) => {
     console.log(image)
-    if (image.acf && image.acf.video_embed_url && image.acf.video_embed_url != '') {
+    if (image.acf && image.acf.video_embed_url && image.acf.video_embed_url !== '') {
       return (
         <div className='masonry-video-container' style={{'--aspect-ratio': `${image.media_details.height / image.media_details.width * 100}%`}}>
           <button onClick={handleOpen(i)}>
             <div className='video-container iframe'>
               <iframe
+                title={image.alt_text}
                 src={image.acf.video_embed_url}
                 frameborder='0'
                 allow='autoplay; fullscreen'
@@ -20,19 +21,11 @@ const ThumbGrid = ({ images, handleOpen, classes }) => {
           </button>
         </div>
       )
-    } else if (image.media_details.fileformat === 'mp4') {
+    } else if (image.localFile.internal.mediaType === 'image/gif') {
       return (
-        <div className='masonry-video-container' style={{'--aspect-ratio': `${image.media_details.height / image.media_details.width * 100}%`}}>
+        <div className='masonry-image-container'>
           <button onClick={handleOpen(i)}>
-            <div className='video-container'>
-              <video
-                width={image.media_details.width}
-                height={image.media_details.height}
-                muted='true'
-                controls>
-                <source src={image.localFile.publicURL} type='video/x-m4v' />
-              </video>
-            </div>
+            <img src={image.localFile.publicURL} alt={image.alt_text} />
           </button>
         </div>
       )
@@ -40,7 +33,7 @@ const ThumbGrid = ({ images, handleOpen, classes }) => {
       return (
         <div className='masonry-image-container' key={i}>
           <button onClick={handleOpen(i)}>
-            {image.localFile.childImageSharp && <Img style={{width: '100%', height: 0, paddingBottom: `${image.media_details.height / image.media_details.width * 100}%`}} fixed={image.localFile.childImageSharp.fixed} />}
+            {image.localFile.childImageSharp && <Img style={{width: '100%', height: 0, paddingBottom: `${image.media_details.height / image.media_details.width * 100}%`}} fixed={image.localFile.childImageSharp.fixed} alt={image.alt_text} />}
           </button>
         </div>
       )

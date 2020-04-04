@@ -1,7 +1,6 @@
 import React from 'react'
 
 import LightboxReact from 'lightbox-react'
-import Img from 'gatsby-image'
 import NonStretchedImage from './nonStretchedImage'
 
 const Lightbox = ({images, selectedImage, handleClose, handlePrevRequest, handleNextRequest}) => {
@@ -11,12 +10,18 @@ const Lightbox = ({images, selectedImage, handleClose, handlePrevRequest, handle
     const localCopy = image.localFile
     if (localCopy && localCopy.internal.mediaType === 'image/gif') {
       array.push(<div className='gatsby-image-wrapper' style={{ position: 'relative', overflow: 'hidden' }}>
-                   <Img fluid={localCopy.fluid} style={{ display: 'block', margin: 'auto', width: '100%', maxHeight: '100vh' }} />
+                   <img
+                     src={localCopy.publicURL}
+                     width={image.media_details.width}
+                     height={image.media_details.height}
+                     style={{ display: 'block', margin: 'auto', width: '100%', maxHeight: '100vh' }}
+                     alt={image.alt_text} />
                  </div>)
-    } else if (image.acf && image.acf.video_embed_url && image.acf.video_embed_url != '') {
+    } else if (image.acf && image.acf.video_embed_url && image.acf.video_embed_url !== '') {
       array.push(
         <div className='video-container iframe'>
           <iframe
+            title={image.alt_text}
             src={image.acf.video_embed_url}
             frameborder='0'
             allow='autoplay; fullscreen'
@@ -24,7 +29,7 @@ const Lightbox = ({images, selectedImage, handleClose, handlePrevRequest, handle
         </div>
       )
     } else {
-      array.push(<NonStretchedImage fluid={localCopy.childImageSharp.fluid} />)
+      array.push(<NonStretchedImage fluid={localCopy.childImageSharp.fluid} alt={image.alt_text} />)
     }
   })
 

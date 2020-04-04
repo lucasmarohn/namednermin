@@ -68,7 +68,6 @@ const GalleryComponent = props => {
   useEffect(() => {
 
     function setupMasonryGrid () {
-      console.log('setup')
       resizeAllGridItems()
     }
 
@@ -87,11 +86,6 @@ const GalleryComponent = props => {
       }
     }
 
-    function resizeInstance (instance) {
-      const item = instance.elements[0]
-      resizeGridItem(item)
-    }
-
     window.onload = setupMasonryGrid()
     window.addEventListener('resize', resizeAllGridItems)
   })
@@ -99,6 +93,7 @@ const GalleryComponent = props => {
   return (
     <div className='masonry-gallery'>
       <ThumbGrid images={images()} handleOpen={handleOpen} />
+      {console.log(selectedImage)}
       {showLightbox && selectedImage !== null && (
        <LightBox
          images={images()}

@@ -1,5 +1,4 @@
 import React from 'react'
-import { graphql } from 'gatsby'
 import HeaderFooter from '../containers/HeaderFooter'
 import { Helmet } from 'react-helmet'
 

@@ -16,16 +16,24 @@ const Lightbox = ({images, selectedImage, handleClose, handlePrevRequest, handle
                  </div>)
     } else if (image.media_details.fileformat === 'mp4') {
       array.push(
-        <div className='gatsby-image-wrapper' style={{position: 'relative', overflow: 'hidden'}}>
+        <div className='gatsby-image-wrapper' style={{ position: 'relative', overflow: 'hidden' }}>
           <video
             style={{ display: 'block', margin: 'auto', width: '100%', maxHeight: '100vh' }}
-            autoplay
             muted
-            looping
             controls='false'
             playsinline='false'>
             <source src={localCopy.publicURL} type='video/x-m4v' />
           </video>
+        </div>
+      )
+    } else if (image.acf && image.acf.video_embed_url && image.acf.video_embed_url != '') {
+      array.push(
+        <div className='video-container iframe'>
+          <iframe
+            src={image.acf.video_embed_url}
+            frameborder='0'
+            allow='autoplay; fullscreen'
+            allowfullscreen />
         </div>
       )
     } else {

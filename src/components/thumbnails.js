@@ -5,7 +5,21 @@ import Img from 'gatsby-image'
 const ThumbGrid = ({ images, handleOpen, classes }) => {
 
   return images.map((image, i) => {
-    if (image.media_details.fileformat === 'mp4') {
+    if (image.acf && image.acf.video_embed_url && image.acf.video_embed_url != '') {
+      return (
+        <div className='masonry-video-container' style={{'--aspect-ratio': `${image.media_details.height / image.media_details.width * 100}%`}}>
+          <button onClick={handleOpen(i)}>
+            <div className='video-container iframe'>
+              <iframe
+                src={image.acf.video_embed_url}
+                frameborder='0'
+                allow='autoplay; fullscreen'
+                allowfullscreen />
+            </div>
+          </button>
+        </div>
+      )
+    } else if (image.media_details.fileformat === 'mp4') {
       return (
         <div className='masonry-video-container' style={{'--aspect-ratio': `${image.media_details.height / image.media_details.width * 100}%`}}>
           <button onClick={handleOpen(i)}>

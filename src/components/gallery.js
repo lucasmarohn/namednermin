@@ -29,6 +29,9 @@ const GalleryComponent = props => {
       wordpressAcfPages(wordpress_id: {eq: 8}) {
         acf {
           grid {
+            acf {
+              video_embed_url
+            }
             localFile {
               childImageSharp {
                 fluid(maxWidth: 1500) {

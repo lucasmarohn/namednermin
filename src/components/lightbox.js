@@ -12,7 +12,7 @@ const Lightbox = ({images, selectedImage, handleClose, handlePrevRequest, handle
     const localCopy = image.localFile
     if (localCopy && localCopy.internal.mediaType === 'image/gif') {
       array.push(<div className='gatsby-image-wrapper' style={{ position: 'relative', overflow: 'hidden' }}>
-                   <img src={localCopy.publicURL} style={{ display: 'block', margin: 'auto', width: '100%', maxHeight: '100vh' }} />
+                   <Img fluid={localCopy.fluid} style={{ display: 'block', margin: 'auto', width: '100%', maxHeight: '100vh' }} />
                  </div>)
     } else if (image.media_details.fileformat === 'mp4') {
       array.push(

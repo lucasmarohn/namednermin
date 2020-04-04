@@ -29,6 +29,22 @@ const ThumbGrid = ({ images, handleOpen, classes }) => {
           </button>
         </div>
       )
+    } else if (image.localFile && image.localFile.internal.mediaType === 'video/webm') {
+      return (
+        <div className='masonry-image-container' style={{position: 'relative', '--aspect-ratio': `${image.media_details.height / image.media_details.width * 100}%`}}>
+          <button onClick={handleOpen(i)}>
+            <div className='video-container'>
+              <video
+                autoplay='true'
+                muted='true'
+                loop='true'
+                width={image.media_details.width}
+                height={image.media_details.height}>
+                <source src={image.acf.thumbnail_video.localFile.publicURL} type='video/webm' />
+              </video>
+            </div>
+          </button>
+        </div>)
     } else {
       return (
         <div className='masonry-image-container' key={i}>

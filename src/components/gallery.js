@@ -31,6 +31,11 @@ const GalleryComponent = props => {
           grid {
             acf {
               video_embed_url
+              thumbnail_video {
+                localFile {
+                  publicURL
+                }
+              }
             }
             localFile {
               childImageSharp {
@@ -68,7 +73,20 @@ const GalleryComponent = props => {
   useEffect(() => {
 
     function setupMasonryGrid () {
-      resizeAllGridItems()
+      const grids = document.querySelectorAll('.masonry-gallery')
+      console.log(window.innerWidth)
+      if (window.innerWidth > 600) {
+        grids.forEach(grid => {
+          grid.style.setProperty('grid-template-columns', '1fr 1fr')
+          grid.style.setProperty('grid-auto-rows', '')
+        })
+        resizeAllGridItems()
+      } else {
+        grids.forEach(grid => {
+          grid.style.setProperty('grid-auto-rows', 'auto')
+          grid.style.setProperty('grid-template-columns', '1fr')
+        })
+      }
     }
 
     function resizeGridItem (item) {
@@ -87,7 +105,7 @@ const GalleryComponent = props => {
     }
 
     window.onload = setupMasonryGrid()
-    window.addEventListener('resize', resizeAllGridItems)
+    window.addEventListener('resize', setupMasonryGrid)
   })
 
   return (

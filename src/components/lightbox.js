@@ -28,7 +28,17 @@ const Lightbox = ({images, selectedImage, handleClose, handlePrevRequest, handle
             allowfullscreen />
         </div>
       )
-    } else {
+    } else if (localCopy && localCopy.internal.mediaType === 'video/webm') {
+      array.push(<div className='video-container'>
+                   <video
+                     loop='true'
+                     autoplay='true'
+                     muted='true'
+                     style={{ display: 'block', margin: 'auto', width: '100%', maxWidth: '100%', maxHeight: '100vh' }}>
+                     <source src={localCopy.publicURL} type='video/webm' />
+                   </video>
+                 </div>)
+    } else if (localCopy && localCopy.childImageSharp) {
       array.push(<NonStretchedImage fluid={localCopy.childImageSharp.fluid} alt={image.alt_text} />)
     }
   })

@@ -19,23 +19,17 @@ const Lightbox = ({images, selectedImage, handleClose, handlePrevRequest, handle
                  </div>)
     } else if (image.acf && image.acf.video_embed_url && image.acf.video_embed_url !== '') {
       array.push(
-        <div className='video-container iframe'>
-          <iframe
-            title={image.alt_text}
-            src={image.acf.video_embed_url}
-            frameborder='0'
-            allow='autoplay; fullscreen'
-            allowfullscreen />
+        <div className='video-container iframe' dangerouslySetInnerHTML={{__html: image.acf.video_embed_url}}>
         </div>
       )
-    } else if (localCopy && localCopy.internal.mediaType === 'video/webm') {
+    } else if (localCopy && (localCopy.internal.mediaType === 'video/webm' || localCopy.internal.mediaType === 'video/quicktime' || localCopy.internal.mediaType === 'video/mp4')) {
       array.push(<div className='video-container'>
                    <video
                      loop='true'
                      autoplay='true'
                      muted='true'
-                     style={{ display: 'block', margin: 'auto', width: '100%', maxWidth: '100%', maxHeight: '100vh' }}>
-                     <source src={localCopy.publicURL} type='video/webm' />
+                     style={{ display: 'block', margin: 'auto', width: '100%', maxWidth: image.media_details.width, maxHeight: image.media_details.height }}>
+                     <source src={localCopy.publicURL} type={image.localFile.internal.mediaType} />
                    </video>
                  </div>)
     } else if (localCopy && localCopy.childImageSharp) {

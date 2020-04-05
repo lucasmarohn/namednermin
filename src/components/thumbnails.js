@@ -10,13 +10,7 @@ const ThumbGrid = ({ images, handleOpen, classes }) => {
       return (
         <div className='masonry-video-container' style={{'--aspect-ratio': `${image.media_details.height / image.media_details.width * 100}%`}}>
           <button onClick={handleOpen(i)}>
-            <div className='video-container iframe'>
-              <iframe
-                title={image.alt_text}
-                src={image.acf.video_embed_url}
-                frameborder='0'
-                allow='autoplay; fullscreen'
-                allowfullscreen />
+            <div className='video-container iframe' dangerouslySetInnerHTML={{__html: image.acf.video_embed_url}}>
             </div>
           </button>
         </div>
@@ -29,7 +23,7 @@ const ThumbGrid = ({ images, handleOpen, classes }) => {
           </button>
         </div>
       )
-    } else if (image.localFile && image.localFile.internal.mediaType === 'video/webm') {
+    } else if (image.localFile && (image.localFile.internal.mediaType === 'video/webm' || image.localFile.internal.mediaType === 'video/quicktime' || image.localFile.internal.mediaType === 'video/mp4')) {
       return (
         <div className='masonry-image-container' style={{position: 'relative', '--aspect-ratio': `${image.media_details.height / image.media_details.width * 100}%`}}>
           <button onClick={handleOpen(i)}>
@@ -40,7 +34,7 @@ const ThumbGrid = ({ images, handleOpen, classes }) => {
                 loop='true'
                 width={image.media_details.width}
                 height={image.media_details.height}>
-                <source src={image.acf.thumbnail_video.localFile.publicURL} type='video/webm' />
+                <source src={image.localFile.publicURL} type={image.localFile.internal.mediaType} />
               </video>
             </div>
           </button>

@@ -10,7 +10,13 @@ const ThumbGrid = ({ images, handleOpen, classes }) => {
       return (
         <div className='masonry-video-container' style={{'--aspect-ratio': `${image.media_details.height / image.media_details.width * 100}%`}}>
           <button onClick={handleOpen(i)}>
-            <div className='video-container iframe' dangerouslySetInnerHTML={{__html: image.acf.video_embed_url}}>
+            <div className='video-container iframe'>
+              <iframe
+                title={image.alt_text}
+                src={image.acf.video_embed_url}
+                frameborder='0'
+                allow='autoplay; fullscreen'
+                allowfullscreen />
             </div>
           </button>
         </div>

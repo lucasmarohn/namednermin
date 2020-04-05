@@ -19,7 +19,13 @@ const Lightbox = ({images, selectedImage, handleClose, handlePrevRequest, handle
                  </div>)
     } else if (image.acf && image.acf.video_embed_url && image.acf.video_embed_url !== '') {
       array.push(
-        <div className='video-container iframe' dangerouslySetInnerHTML={{__html: image.acf.video_embed_url}}>
+        <div className='video-container iframe'>
+          <iframe
+            title={image.alt_text}
+            src={image.acf.video_embed_url}
+            frameborder='0'
+            allow='autoplay; fullscreen'
+            allowfullscreen />
         </div>
       )
     } else if (localCopy && (localCopy.internal.mediaType === 'video/webm' || localCopy.internal.mediaType === 'video/quicktime' || localCopy.internal.mediaType === 'video/mp4')) {

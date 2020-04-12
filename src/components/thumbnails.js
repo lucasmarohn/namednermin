@@ -38,6 +38,7 @@ const ThumbGrid = ({ images, handleOpen, classes }) => {
                 autoplay='true'
                 muted='true'
                 loop='true'
+                playsinline='true'
                 width={image.media_details.width}
                 height={image.media_details.height}>
                 <source src={image.localFile.publicURL} type={image.localFile.internal.mediaType} />

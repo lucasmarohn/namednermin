@@ -1,6 +1,8 @@
 import React from 'react'
 import { useStaticQuery, graphql, Link } from 'gatsby'
 
+import { OutboundLink } from 'gatsby-plugin-google-analytics'
+
 export default () => {
   const { wordpressSiteMetadata } = useStaticQuery(graphql`
     query {
@@ -21,14 +23,20 @@ export default () => {
         <Link to='/'> Home
         </Link>
         {" "}
-        <a href='https://instagram.com/namednermin' target='_blank' rel='noopener noreferrer'>Instagram</a>
+        <OutboundLink href='https://instagram.com/namednermin' target='_blank' rel='noopener noreferrer'>
+          Instagram
+        </OutboundLink>
         {" "}
-        <a href='https://twitter.com/namednermin' target='_blank' rel='noopener noreferrer'>Twitter</a>
+        <OutboundLink href='https://twitter.com/namednermin' target='_blank' rel='noopener noreferrer'>
+          Twitter
+        </OutboundLink>
       </p>
       <p style={{opacity: .5}}>
         web app by
         {" "}
-        <a href='https://emergence.design' target='_blank' rel='noopener noreferrer'>emergence</a>
+        <OutboundLink href='https://emergence.design' target='_blank' rel='noopener noreferrer'>
+          emergence
+        </OutboundLink>
       </p>
     </footer>
   )
